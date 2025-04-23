@@ -14,6 +14,11 @@
 A Model Context Protocol (MCP) server implementation for Alpaca trading that enables Large Language Models (LLMs) like Anthropic Claude to interact with Alpaca's trading API.
 The instructions and commands provided in this README are primarily for MacOS/Linux users.
 
+<p align="center">
+  <img src="images/alpaca-mcp-server-demo.gif" alt="Alpaca MCP Server Demo with Claude Desktop">
+  <figcaption align="center"><em>Demo showing the Claude for Desktop app on the left side and the Alpaca web console on the right side to verify the operations.</em></figcaption>
+</p>
+
 ## Introduction
 
 ### Model Context Protocol (MCP)
@@ -55,13 +60,10 @@ The instructions and commands provided in this README are primarily for MacOS/Li
 2. [Optional but Recommended] Create and activate a virtual environment:
    ```bash
    uv venv
-   ```
-   This will create a `.venv` directory. Next, activate the virtual environment:
-   ```bash
    source .venv/bin/activate
    ```
 
-3. Install dependencies. `uv` reads the `uv.lock` file and install the specified versions of all dependencies `"mcp[cli]" alpaca-py python-dotenv`
+3. Install dependencies. `uv` reads the `uv.lock` file and install the specified versions of all dependencies
     ```bash
     uv sync
     ```
@@ -84,7 +86,7 @@ Make sure you have Claude for Desktop installed.
 
 2. Add the server in the `mcpServers` key.
 
-    ```bash
+    ```json
     {
         "mcpServers": {
             "alpaca": {
@@ -99,7 +101,15 @@ Make sure you have Claude for Desktop installed.
         }
     }
     ```
-    Note: Make sure to replace the absolute paths of `uv` and `alpaca-mcp-server` directory with the actual path on your machine.
+    Note: Make sure to replace the absolute paths of `uv` and `alpaca-mcp-server` directory with the actual path on your machine. Hint: run `which uv` to show your absolute `uv` path.
+
+3. Re-launch your Claude for Desktop if it's already launched. Click on the hammer icon to verify the available MCP tools. Here are some queries you could try:
+    - "What's my current Alpaca portfolio balance?"
+    - "Place a buy limit order for 10 shares of JPMorgan Chase at $238."
+    - "Buy 1 share of GOOGL at market price."
+    - "Place a sell limit order for 1 share of AAPL at $210."
+    - "Cancel my sell limit order for AAPL."
+    Note: If prompted, allow the tool access to run.
 
 ## Available Resources
 
@@ -108,6 +118,8 @@ Make sure you have Claude for Desktop installed.
 - `market://quote/{symbol}` - Get latest quote for a symbol
 - `market://bars/{symbol}` - Get historical bars for a symbol (last 7 days)
 - `orders://recent` - Get recent orders (last 7 days)
+
+Note: Real-time market data features like quotes and historical bars might only be fully accessible with a Live trading account, depending on your Alpaca subscription level.
 
 ## Available Tools
 
